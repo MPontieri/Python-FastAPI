@@ -1,0 +1,80 @@
+{
+	"info": {
+		"_postman_id": "e6486009-6142-4082-8401-d8cf94e0f11f",
+		"name": "exemplo_pix",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31566047",
+		"_collection_link": "https://solar-water-660751.postman.co/workspace/talentx_crud_1~22e21ee3-6570-4523-90a1-00a7ad8d9a0e/collection/31566047-e6486009-6142-4082-8401-d8cf94e0f11f?action=share&source=collection_link&creator=31566047"
+	},
+	"item": [
+		{
+			"name": "chamada webhook",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"pix\": [\n    {\n      \"endToEndId\": \"E1803615022211340s08793XPJ\",\n      \"txid\": \"{{tx_id}}\",\n      \"chave\": \"2c3c7441-b91e-4982-3c25-6105581e18ae\",\n      \"valor\": \"0.01\",\n      \"horario\": \"2020-12-21T13:40:34.000Z\",\n      \"infoPagador\": \"pagando o pix\"\n    }\n  ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/pix",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"pix"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "gerar cobranca",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"",
+							"var tx_id = jsonData.tx_id;",
+							"postman.setEnvironmentVariable(\"tx_id\", tx_id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"pix\": [\n    {\n      \"endToEndId\": \"E1803615022211340s08793XPJ\",\n      \"txid\": \"fc9a43k6ff384ryP5f41719\",\n      \"chave\": \"2c3c7441-b91e-4982-3c25-6105581e18ae\",\n      \"valor\": \"0.01\",\n      \"horario\": \"2020-12-21T13:40:34.000Z\",\n      \"infoPagador\": \"pagando o pix\"\n    }\n  ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/gerar_cobranca/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"gerar_cobranca",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
